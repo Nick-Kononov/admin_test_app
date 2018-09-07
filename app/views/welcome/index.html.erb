@@ -1,0 +1,2 @@
+<%= (@user.is_a? User) ? @user.username + ' is not admin' : @user %>
+<%= link_to 'Log out', destroy_user_session_path if @user.is_a? User %>
