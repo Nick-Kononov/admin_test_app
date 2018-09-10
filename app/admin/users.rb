@@ -1,12 +1,20 @@
 ActiveAdmin.register User do
-  permit_params :email, :password, :password_confirmation, :username, :role
+  menu priority: 2
+  permit_params :email, :password, :password_confirmation, :username, :role_id
+
+  controller do
+    def new
+      @user = User.new
+      @user.build_role
+    end
+  end
 
   index do
     selectable_column
     id_column
     column :email
     column :username
-    column :admin
+    column :role
     column :created_at
     actions
   end
@@ -14,7 +22,6 @@ ActiveAdmin.register User do
   filter :email
   filter :username
   filter :created_at
-  filter :admin
 
   form do |f|
     f.inputs do
@@ -22,7 +29,7 @@ ActiveAdmin.register User do
       f.input :username
       f.input :password
       f.input :password_confirmation
-      f.input :admin
+      f.input :role
     end
     f.actions
   end
