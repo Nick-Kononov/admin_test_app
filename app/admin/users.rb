@@ -2,13 +2,6 @@ ActiveAdmin.register User do
   menu priority: 2
   permit_params :email, :password, :password_confirmation, :username, :role_id
 
-  controller do
-    def new
-      @user = User.new
-      @user.build_role
-    end
-  end
-
   index do
     selectable_column
     id_column

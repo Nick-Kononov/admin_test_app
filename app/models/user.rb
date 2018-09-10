@@ -6,6 +6,9 @@ class User < ApplicationRecord
 
   belongs_to :role, optional: true
 
+  has_many :user_skills, class_name: 'UserSkill'
+  has_many :skills, through: :user_skills
+
   def admin?
     role.title == 'admin'
   end
