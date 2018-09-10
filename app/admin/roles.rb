@@ -1,5 +1,5 @@
 ActiveAdmin.register Role do
-  menu priority: 4
+  menu priority: 3
   permit_params :title, :description
 
   form do |f|

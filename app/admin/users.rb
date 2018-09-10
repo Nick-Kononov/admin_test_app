@@ -33,7 +33,7 @@ ActiveAdmin.register User do
           table_for user.user_skills do
             column :skill
             column 'Section' do |us|
-              us.skill.section
+              us.skill.category
             end
             column :level
             column :desire

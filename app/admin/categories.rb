@@ -1,4 +1,4 @@
-ActiveAdmin.register Section do
+ActiveAdmin.register Category do
   menu priority: 5
   permit_params :name
 
@@ -6,8 +6,8 @@ ActiveAdmin.register Section do
     selectable_column
     id_column
     column :name
-    column 'Skills', sortable: :skills_count do |section|
-      section.skills.count
+    column 'Skills', sortable: :skills_count do |category|
+      category.skills.count
     end
     actions
   end

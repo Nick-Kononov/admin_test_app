@@ -29,6 +29,12 @@ ActiveRecord::Schema.define(version: 2018_09_10_082446) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "title", null: false
     t.string "description"
@@ -36,19 +42,13 @@ ActiveRecord::Schema.define(version: 2018_09_10_082446) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "sections", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "skills", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.bigint "section_id"
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["section_id"], name: "index_skills_on_section_id"
+    t.index ["category_id"], name: "index_skills_on_category_id"
   end
 
   create_table "user_skills", force: :cascade do |t|

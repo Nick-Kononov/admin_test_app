@@ -1,24 +1,24 @@
 ActiveAdmin.register Skill do
-  menu priority: 5
-  permit_params :name, :description, :section_id
+  menu priority: 4
+  permit_params :name, :description, :category_id
 
   index do
     selectable_column
     id_column
     column :name
-    column :section
+    column :category
     actions
   end
 
   filter :name
   filter :user
-  filter :section
+  filter :category
 
   form do |f|
     f.inputs do
       f.input :name
       f.input :description
-      f.input :section
+      f.input :category
     end
     f.actions
   end
