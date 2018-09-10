@@ -9,3 +9,4 @@ admin = Role.create(title: 'admin', description: 'He is the Lord, the father and
 user = Role.create(title: 'user', description: 'Just common citizen of internets')
 User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password', role: admin)
 User.create!(email: 'user@example.com', password: 'password', password_confirmation: 'password', role: user)
+Section.create!(name: 'General')
