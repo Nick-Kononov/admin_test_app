@@ -6,6 +6,8 @@ To run app do following:
   `$ bundle install`
 * Create database
   `$ rails db:create db:migrate db:seed`
+* Set up client
+  `$ yarn --cwd client`
 * Run app with
   `$ rake start`
 
