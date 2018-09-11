@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To run app do following:
+* Configure database in *config/database.yml*
+* Install needed gems
+  `$ bundle install`
+* Create database
+  `$ rails db:create db:migrate db:seed`
+* Run app with
+  `$ rake start`
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Well done!
+Now go to *localhost:3001* and login with email: admin@example.com and password: *password*.
