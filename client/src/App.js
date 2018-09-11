@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import './app.css'
+import Card from './components/Card'
 
 class App extends Component {
   constructor(props) {
@@ -6,7 +8,7 @@ class App extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      username: ''
+      user: {}
     };
   }
 
@@ -15,11 +17,13 @@ class App extends Component {
       .then(res => res.json())
       .then(
         (result) => {
-          if (result)
-          this.setState({
-            isLoaded: true,
-            username: result.username
-          })},
+          if (result) {
+            this.setState({
+              isLoaded: true,
+              user: result
+            })
+          }
+        },
         (error) => {
           this.setState({
             isLoaded: true,
@@ -30,11 +34,9 @@ class App extends Component {
   }
 
   render() {
+    let {username='stranger', email='unknown email'} = this.state.user
     return (
-      <div>
-        Hello,       
-        {this.state.username ? this.state.username : 'world'}!
-      </div>
+      <Card username={username} email={email} />
     )
   }
 }
