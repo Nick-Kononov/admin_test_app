@@ -16,6 +16,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'activeadmin'
 
+gem 'foreman'
+
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
