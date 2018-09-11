@@ -6,5 +6,14 @@ module Api::V1
         format.json { render json: @users }
       end
     end
+
+    def show
+      @user = current_user
+
+      respond_to do |format|
+
+        format.json {render json: @user;p 'current user returned'}
+      end
+    end
   end
 end
