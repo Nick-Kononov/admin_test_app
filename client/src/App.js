@@ -34,9 +34,12 @@ class App extends Component {
   }
 
   render() {
-    let {username='stranger', email='unknown email'} = this.state.user
     return (
-      <Card username={username} email={email} />
+      <div>
+        {console.log('user in app',this.state.user)}
+        {this.state.user ? <Card user={this.state.user} /> : <div>No user</div>}
+      </div>
+
     )
   }
 }
