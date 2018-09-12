@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  root 'welcome#index'
-  get 'welcome', to: 'welcome#index'
-
+  
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
