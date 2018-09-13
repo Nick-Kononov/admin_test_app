@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './app.css'
-import Card from './components/Card'
+import Card from './components/Card';
+import Form from './components/Form';
+import './app.css';
 
 class App extends Component {
   constructor(props) {
@@ -36,8 +37,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        {console.log('user in app',this.state.user)}
         {this.state.user ? <Card user={this.state.user} /> : <div>No user</div>}
+        <Form />
       </div>
 
     )

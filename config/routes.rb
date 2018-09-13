@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     namespace :api do
       namespace :v1, defaults: {format: :json} do
         resources :users
+        resources :categories
         get 'current_user', to: 'users#show'
       end
     end
