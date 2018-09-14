@@ -25,11 +25,10 @@ class Skill extends React.Component {
   render() {
     return(
       <div className="card-body">
-        <div className="form-inline">
-          <div className="form-group">
+        <div className="form-inline row">
             <div
-              className="custom-control custom-checkbox"
-              style={{width: 50}}>
+              className="custom-control custom-checkbox "
+              style={{width: 80}}>
               <input
                 type="checkbox"
                 className="custom-control-input form-control"
@@ -57,7 +56,6 @@ class Skill extends React.Component {
                 {this.createOptions()}
               </select>
             </div>
-          </div>
         </div>
         <div className="card-text text-muted">
           {this.props.skill.description}
