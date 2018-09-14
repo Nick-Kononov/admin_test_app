@@ -11,8 +11,10 @@ module Api::V1
       @user = current_user
 
       respond_to do |format|
-
-        format.json {render json: @user;p 'current user returned'}
+        format.json {
+          render json: @user, serializer: Info::UserSerializer, include: '**'
+          p 'current user returned'
+        }
       end
     end
   end

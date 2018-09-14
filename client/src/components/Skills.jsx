@@ -54,6 +54,7 @@ class Skills extends React.Component {
                       <ul>
                         <li>level: {user_skill.level}/10</li>
                         <li>desire: {user_skill.desire}/10</li>
+                        <li>category: {user_skill.skill.category.name}</li>
                       </ul>
                     </div>
                   )
