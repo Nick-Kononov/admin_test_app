@@ -11,5 +11,8 @@ To run app do following:
 * Run app with
   `$ rake start`
 
-### Well done!
+## Well done!
 Now go to *localhost:3001* and login with email: admin@example.com and password: *password*.
+
+## Example app
+See demo [here](https://secure-woodland-27196.herokuapp.com/)
