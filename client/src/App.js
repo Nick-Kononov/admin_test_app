@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { read_cookie } from 'sfcookies';
 import UserCard from './components/UserCard';
-// import Form from './components/Form';
 import Login from './components/Login';
 import './app.css';
 
@@ -19,6 +18,11 @@ class App extends Component {
     if (user.id) {
       this.setState({
         isLoaded: true,
+        user
+      })
+    } else {
+      this.setState({
+        isLoaded: false,
         user
       })
     }

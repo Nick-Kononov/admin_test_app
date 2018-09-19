@@ -3,8 +3,25 @@ import React from 'react';
 class Skill extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      disabled: true
+    this.state = this.setDefaultState()
+  }
+
+  setDefaultState(){
+    console.log(this.props.skill);
+    if (this.props.skill.active) {
+      return {
+        disabled: true,
+        active: true,
+        level: this.props.skill.level,
+        desire: this.props.skill.desire
+      }
+    } else {
+      return {
+        disabled: true,
+        active: false,
+        level: 0,
+        desire: 0
+      }
     }
   }
 
@@ -32,6 +49,7 @@ class Skill extends React.Component {
               <input
                 type="checkbox"
                 className="custom-control-input form-control"
+                checked={this.state.added}
                 id={`customCheck${this.props.skill.id}`}
                 onChange={() => this.switchDisabled()}/>
               <label

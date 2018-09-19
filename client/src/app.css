@@ -15,3 +15,13 @@ form#login input {
 .invisible {
   display: none;
 }
+
+.badge {
+  margin-left: 1em;
+  cursor: pointer;
+  float: right;
+}
+
+.card-title {
+  display: inline;
+}
