@@ -7,3 +7,11 @@
 form#login input {
   margin-right: 1em;
 }
+
+.message {
+  margin-top: 1em;
+}
+
+.invisible {
+  display: none;
+}

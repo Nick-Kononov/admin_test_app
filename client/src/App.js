@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { read_cookie } from 'sfcookies';
 import UserCard from './components/UserCard';
-import Form from './components/Form';
+// import Form from './components/Form';
 import Login from './components/Login';
 import './app.css';
 
@@ -8,39 +9,29 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: null,
       isLoaded: false,
-      user: {}
+      user: read_cookie('user')
     };
   }
 
-  componentDidMount() {
-    fetch('/api/v1/users/current')
-      .then(res => res.json())
-      .then(
-        (result) => {
-          if (result) {
-            this.setState({
-              isLoaded: true,
-              user: result
-            })
-          }
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      )
+  checkForUser() {
+    let user = read_cookie('user');
+    if (user.id) {
+      this.setState({
+        isLoaded: true,
+        user
+      })
+    }
+  }
+  // Check while cookie 'user' appears
+  componentDidMount(){
+    setInterval(() => this.checkForUser(), 1000)
   }
 
   render() {
     return (
       <div>
-        {console.log('user in app', this.state.user) &&
-        this.state.user ? <UserCard user={this.state.user} /> : <Login />}
-        <Form />
+        {this.state.isLoaded ? <UserCard user={this.state.user} /> : <Login />}
       </div>
 
     )
