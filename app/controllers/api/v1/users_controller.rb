@@ -7,11 +7,9 @@ module Api::V1
     end
 
     def current
-      @user = User.find_by_email(params[:email])
-
       respond_to do |format|
         format.json {
-          render json: @user, serializer: Info::UserSerializer, include: '**'
+          render json: @current_user, serializer: Info::UserSerializer, include: '**'
           p 'current user returned'
         }
       end
@@ -33,7 +31,7 @@ module Api::V1
         render json: {
           access_token: command.result,
           message: 'Login Successful'
-        }
+        }.to_json
       else
         render json: { error: command.errors }, status: :unauthorized
       end
