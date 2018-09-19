@@ -3,3 +3,7 @@
   min-width: 400px;
   width: 35%;
 }
+
+form#login input {
+  margin-right: 1em;
+}

@@ -1,14 +1,13 @@
 module Api::V1
   class UsersController < ApiController
-    def index
-      @users = User.all
-      respond_to do |format|
-        format.json { render json: @users }
-      end
+    skip_before_action :authenticate_request, only: %i[login]
+
+    def login
+      authenticate params[:email], params[:password]
     end
 
-    def show
-      @user = current_user
+    def current
+      @user = User.find_by_email(params[:email])
 
       respond_to do |format|
         format.json {
@@ -17,5 +16,28 @@ module Api::V1
         }
       end
     end
+
+    private
+
+    def user_params
+      params.permit(
+        :email,
+        :password
+      )
+    end
+
+    def authenticate(email, password)
+      command = AuthenticateUser.call(email, password)
+
+      if command.success?
+        render json: {
+          access_token: command.result,
+          message: 'Login Successful'
+        }
+      else
+        render json: { error: command.errors }, status: :unauthorized
+      end
+    end
+
   end
 end

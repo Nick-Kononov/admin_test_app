@@ -16,6 +16,11 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'activeadmin'
 
+gem 'bcrypt'
+gem 'rack-cors', :require => 'rack/cors'
+gem 'jwt'
+gem 'simple_command'
+
 gem 'foreman'
 
 gem 'active_model_serializers'

@@ -1,7 +1,7 @@
 import React from 'react'
 import Skills from './Skills'
 
-class Card extends React.Component {
+class UserCard extends React.Component {
 
   render() {
     let {username, email} = this.props.user
@@ -21,4 +21,4 @@ class Card extends React.Component {
   }
 }
 
-export default Card;
+export default UserCard;

@@ -1,7 +1,9 @@
 {
   "name": "admin-task",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "react-redux": "^5.0.7"
+  },
   "license": "MIT",
   "engines": {
     "node": "8.10.0",

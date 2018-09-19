@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Card from './components/Card';
+import UserCard from './components/UserCard';
 import Form from './components/Form';
+import Login from './components/Login';
 import './app.css';
 
 class App extends Component {
@@ -14,7 +15,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('/api/v1/current_user')
+    fetch('/api/v1/users/current')
       .then(res => res.json())
       .then(
         (result) => {
@@ -37,7 +38,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        {this.state.user ? <Card user={this.state.user} /> : <div>No user</div>}
+        {console.log('user in app', this.state.user) &&
+        this.state.user ? <UserCard user={this.state.user} /> : <Login />}
         <Form />
       </div>
 
