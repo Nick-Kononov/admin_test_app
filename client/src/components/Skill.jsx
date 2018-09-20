@@ -10,15 +10,13 @@ class Skill extends React.Component {
     console.log(this.props.skill);
     if (this.props.skill.active) {
       return {
-        disabled: true,
-        active: true,
+        disabled: !this.props.skill.active,
         level: this.props.skill.level,
         desire: this.props.skill.desire
       }
     } else {
       return {
-        disabled: true,
-        active: false,
+        disabled: !this.props.skill.active,
         level: 0,
         desire: 0
       }
@@ -31,9 +29,13 @@ class Skill extends React.Component {
 
   createOptions(){
     return(
-      [...Array(11).keys()].map(level => {
+      [...Array(11).keys()].map(value => {
         return(
-          <option key={level} value={level}>{level}</option>
+          <option
+            key={value}
+            value={value}>
+            {value}
+          </option>
         )
       })
     )
@@ -49,8 +51,8 @@ class Skill extends React.Component {
               <input
                 type="checkbox"
                 className="custom-control-input form-control"
-                checked={this.state.added}
                 id={`customCheck${this.props.skill.id}`}
+                checked={!this.state.disabled}
                 onChange={() => this.switchDisabled()}/>
               <label
                 className="custom-control-label"
@@ -62,7 +64,9 @@ class Skill extends React.Component {
               <label>Level</label>
               <select
                 className="custom-select form-control mx-2"
-                disabled={this.state.disabled}>
+                disabled={this.state.disabled}
+                defaultValue={this.state.level}
+                >
                 {this.createOptions()}
               </select>
             </div>
@@ -70,7 +74,9 @@ class Skill extends React.Component {
               <label>Desire</label>
               <select
                 className="custom-select form-control mx-2"
-                disabled={this.state.disabled}>
+                disabled={this.state.disabled}
+                defaultValue={this.state.desire}
+                >
                 {this.createOptions()}
               </select>
             </div>

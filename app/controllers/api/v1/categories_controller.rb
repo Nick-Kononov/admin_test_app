@@ -1,11 +1,11 @@
 module Api::V1
   class CategoriesController < ApiController
     def index
-      @categories = Category.all
+      user_skills = @current_user.all_refactored_skills
+
       respond_to do |format|
         format.json {
-          render json: @categories,
-          each_serializer: CategorySkills::CategorySerializer
+          render json: user_skills
         }
       end
     end

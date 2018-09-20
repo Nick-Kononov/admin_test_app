@@ -11,7 +11,7 @@ class Form extends React.Component{
     };
   }
 
-  getCategotiesFromApi(){
+  getCategoriesFromApi(){
     let token = 'Bearer ' + read_cookie('token')
     fetch('/api/v1/categories',{
       headers: {'Authorization': token}
@@ -20,37 +20,14 @@ class Form extends React.Component{
       .then(
         (result) => {
           if (result) {
-            this.setState({
-              categories: result
-            })
+            this.setState({categories: result})
           }
-        },
-        (error) => {
-          this.setState({
-            error
-          });
         }
       )
   }
 
   componentWillMount() {
-    this.getCategotiesFromApi()
-  }
-
-  compareCategories() {
-    let categories = this.state.categories
-    categories.forEach(category => {
-      category.skills.forEach(skill => {
-        this.props.userSkills.forEach(user_skill => {
-          if (skill.id === user_skill.skill.id) {
-            skill.active = true
-            skill.level = user_skill.level
-            skill.desire = user_skill.desire
-          }
-        })
-      })
-    })
-    this.setState({categories})
+    this.getCategoriesFromApi()
   }
 
   render() {
@@ -58,7 +35,7 @@ class Form extends React.Component{
       <div className="card">
         <div className="card-body">
           <h2 className="card-title">Avaliable skills</h2>
-            { 
+            {
               this.state.categories.map(category => {
                 return (
                   <Category key={category.id} category={category} />
