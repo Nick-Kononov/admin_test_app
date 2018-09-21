@@ -33,7 +33,7 @@ class Skill extends React.Component {
       "desire": this.state.desire,
       "delete": this.state.disabled
     }
-    
+
     fetch('/api/v1/users/edit_skills',{
       method: 'post',
       headers: {
@@ -69,10 +69,10 @@ class Skill extends React.Component {
   render() {
     return(
       <div className="card-body">
-        <div className="form-inline row">
+        <form className="form-group">
+          <div className="form-inline row">
             <div
-              className="custom-control custom-checkbox "
-              style={{width: 80}}>
+              className="custom-control custom-checkbox">
               <input
                 type="checkbox"
                 className="custom-control-input form-control"
@@ -85,10 +85,12 @@ class Skill extends React.Component {
                 {this.props.skill.name}
               </label>
             </div>
-            <div className="level row ml-3">
-              <label>Level</label>
+            <div className="level ml-3">
+              <label
+                htmlFor={`customLevelSelect${this.props.skill.id}`}>Level</label>
               <select
                 className="custom-select form-control mx-2"
+                id={`customLevelSelect${this.props.skill.id}`}
                 disabled={this.state.disabled}
                 defaultValue={this.state.level}
                 onChange={e => this.setState(
@@ -98,10 +100,13 @@ class Skill extends React.Component {
                 {this.createOptions()}
               </select>
             </div>
-            <div className="desire row ml-3">
-              <label>Desire</label>
+            <div className="desire ml-3">
+              <label
+                htmlFor={`customDesireSelect${this.props.skill.id}`}
+                >Desire</label>
               <select
                 className="custom-select form-control mx-2"
+                id={`customDesireSelect${this.props.skill.id}`}
                 disabled={this.state.disabled}
                 defaultValue={this.state.desire}
                 onChange={e => this.setState(
@@ -111,7 +116,8 @@ class Skill extends React.Component {
                 {this.createOptions()}
               </select>
             </div>
-        </div>
+          </div>
+        </form>
         <div className="card-text text-muted">
           {this.props.skill.description}
         </div>

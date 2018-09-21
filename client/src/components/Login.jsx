@@ -52,24 +52,18 @@ class Login extends React.Component {
   render() {
     return(
       <div className='card card-body'>
-        <form id='login'>
-          <div className='form-inline'>
-            <div className='form-group'>
-              <input type='email'
-                className='form-control'
-                placeholder='email'
-                onChange={event => this.setState({email: event.target.value})} />
-            </div>
-            <div className='form-group'>
-              <input type='password'
-                className='form-control'
-                placeholder='password'
-                onChange={event => this.setState({password: event.target.value})} />
-            </div>
-            <button type="button"
-              className='btn btn-primary'
-              onClick={() => this.login()}> login </button>
-          </div>
+        <form className='form-inline'>
+          <input type='email'
+            className='form-control'
+            placeholder='email'
+            onChange={event => this.setState({email: event.target.value})} />
+          <input type='password'
+            className='form-control'
+            placeholder='password'
+            onChange={event => this.setState({password: event.target.value})} />
+        <button type="button"
+          className='btn btn-primary'
+          onClick={() => this.login()}> login </button>
         </form>
         <div className="message">
           {this.state.loginMessage

@@ -1,11 +1,21 @@
 .card {
   margin: 15px auto;
-  min-width: 400px;
-  width: 35%;
+  min-width: 320px;
+  max-width: 556px;
+  width: 85%;
 }
 
-form#login input {
+#form-group input {
   margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+.level {
+
+}
+
+.form-inline div label {
+  margin: inherit;
 }
 
 .message {
@@ -24,4 +34,21 @@ form#login input {
 
 .card-title {
   display: inline;
+}
+
+label.custom-control-label {
+  float: left;
+}
+
+.custom-checkbox {
+  width: 18%;
+}
+
+.level, .desire{
+  width: 33%!important;
+  display: flex!important;
+}
+
+.custom-select {
+  width: 54px;
 }

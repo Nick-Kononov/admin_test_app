@@ -16,7 +16,7 @@ class Skills extends React.Component {
     if (this.props.userSkills) {
       return(
         <div className="row">
-          <div className="col-4">
+          <div className="col-5">
             <div className="list-group" id="list-tab" role="tablist">
               {
                 this.props.userSkills.map((user_skill, index) => {
@@ -38,7 +38,7 @@ class Skills extends React.Component {
               }
             </div>
           </div>
-          <div className="col-8">
+          <div className="col-7">
             <div className="tab-content" id="nav-tabContent">
               {
                 this.props.userSkills.map((user_skill, index) => {

@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
     this.state = {
       isLoaded: false,
-      user: read_cookie('user')
+      user: null
     };
   }
 
@@ -51,6 +51,13 @@ class App extends Component {
             this.setState({
               user: result,
               isLoaded: true
+            })
+          }
+        }, (error) => {
+          if (error) {
+            this.setState({
+              isLoaded: false,
+              user: null
             })
           }
         }
