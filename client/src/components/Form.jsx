@@ -35,13 +35,13 @@ class Form extends React.Component{
       <div className="card">
         <div className="card-body">
           <h2 className="card-title">Avaliable skills</h2>
-            {
-              this.state.categories.map(category => {
-                return (
-                  <Category key={category.id} category={category} />
-                )
-              })
-            }
+          {
+            this.state.categories.map(category => {
+              return (
+                <Category key={category.id} category={category} />
+              )
+            })
+          }
         </div>
       </div>
     )

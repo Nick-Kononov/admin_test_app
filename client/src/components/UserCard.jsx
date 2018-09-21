@@ -22,7 +22,7 @@ class UserCard extends React.Component {
               <a
                 href=''
                 className="badge badge-pill badge-danger"
-                onClick={() => this.clearCookies()}>Log out</a>
+                onClick={() => this.clearCookies()}>log out</a>
               <h5>{username || 'No user'}</h5>
             </div>
             <h6 className="card-subtitle mb-2 text-muted">{email}</h6>

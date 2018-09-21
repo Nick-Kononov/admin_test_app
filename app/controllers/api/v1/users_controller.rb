@@ -15,6 +15,23 @@ module Api::V1
       end
     end
 
+    def edit_skills
+      @skill = Skill.find(params[:id])
+
+      if params[:delete]
+        @current_user.skills.delete(@skill)
+        return nil
+      end
+
+      @current_user.skills << @skill unless @current_user.skills.exists?(@skill.id)
+
+      user_skill = UserSkill.find_by(user_id: @current_user, skill_id: @skill)
+
+      user_skill.update!(level: params[:level], desire: params[:desire])
+      p 'Successfuly updated'
+      nil
+    end
+
     private
 
     def user_params

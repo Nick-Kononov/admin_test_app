@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { read_cookie } from 'sfcookies';
+import { bake_cookie, read_cookie } from 'sfcookies';
 import UserCard from './components/UserCard';
 import Login from './components/Login';
 import './app.css';
@@ -13,19 +13,53 @@ class App extends Component {
     };
   }
 
-  checkForUser() {
-    let user = read_cookie('user');
+  loadUserFromCookies() {
+    let user = read_cookie('user')
     if (user.id) {
       this.setState({
         isLoaded: true,
         user
       })
-    } else {
-      this.setState({
-        isLoaded: false,
-        user
-      })
     }
+  }
+
+  checkForUser() {
+    let token = read_cookie('token')
+    let user = read_cookie('user')
+
+    if (typeof token === 'string' && !user.id) {
+      this.sendCurrentUserApiRequest()
+    }
+  }
+
+  sendCurrentUserApiRequest() {
+    let token = 'Bearer ' + read_cookie('token')
+
+    let opts = {
+      'Content-Type':'application/json',
+      'Authorization': token
+    }
+    fetch('/api/v1/users/current',{
+      method: 'get',
+      headers: opts
+    })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          if (result) {
+            bake_cookie('user', result);
+            this.setState({
+              user: result,
+              isLoaded: true
+            })
+          }
+        }
+      )
+  }
+
+  componentWillMount() {
+    this.checkForUser();
+    this.loadUserFromCookies();
   }
   // Check while cookie 'user' appears
   componentDidMount(){

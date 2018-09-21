@@ -1,5 +1,5 @@
 import React from 'react';
-import { bake_cookie, read_cookie } from 'sfcookies';
+import { bake_cookie } from 'sfcookies';
 import Alert from './Alert';
 
 class Login extends React.Component {
@@ -23,7 +23,6 @@ class Login extends React.Component {
         loginMessage: result.error.user_authentication[0]
       })
     }
-    console.log(this.state.loginMessage);
   }
 
   sendLoginApiRequest() {
@@ -41,28 +40,6 @@ class Login extends React.Component {
         (result) => {
           if (result) {
             this.handleResult(result)
-            this.sendCurrentUserApiRequest()
-          }
-        }
-      )
-  }
-
-  sendCurrentUserApiRequest() {
-    let token = 'Bearer ' + read_cookie('token')
-
-    let opts = {
-      'Content-Type':'application/json',
-      'Authorization': token
-    }
-    fetch('/api/v1/users/current',{
-      method: 'get',
-      headers: opts
-    })
-      .then(res => res.json())
-      .then(
-        (result) => {
-          if (result.id) {
-            bake_cookie('user', result);
           }
         }
       )
