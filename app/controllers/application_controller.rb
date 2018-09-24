@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     authenticate_user!
     unless current_user.admin?
       flash[:alert] = "Unauthorized Access!"
-      redirect_to root_path
+      redirect_to destroy_user_session_path
     end
   end
 end

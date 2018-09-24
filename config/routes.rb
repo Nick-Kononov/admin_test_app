@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'admin/dashboard#index'
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -6,8 +7,8 @@ Rails.application.routes.draw do
     namespace :v1, defaults: {format: :json} do
       resources :users, only: [:current, :login, :edit_skills] do
         collection do
-          post 'login'
           get 'current'
+          post 'login'
           post 'edit_skills'
         end
       end
