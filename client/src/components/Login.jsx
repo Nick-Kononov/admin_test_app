@@ -1,5 +1,7 @@
 import React from 'react';
-import { bake_cookie } from 'sfcookies';
+import { read_cookie, bake_cookie } from 'sfcookies';
+import { connect } from 'react-redux';
+import { setUserToken } from '../actions';
 import Alert from './Alert';
 
 class Login extends React.Component {
@@ -12,16 +14,10 @@ class Login extends React.Component {
     }
   }
 
-  handleResult(result) {
-    if (result.access_token){
-      bake_cookie('token', result.access_token)
-      this.setState({
-        loginMessage: result.message
-      })
-    } else {
-      this.setState({
-        loginMessage: result.error.user_authentication[0]
-      })
+  componentDidMount(){
+    let token = read_cookie('token')
+    if (typeof token === 'string') {
+      this.props.setUserToken(token);
     }
   }
 
@@ -38,15 +34,19 @@ class Login extends React.Component {
       .then(res => res.json())
       .then(
         (result) => {
-          if (result) {
-            this.handleResult(result)
+          if (result.error) {
+            this.setState({
+              loginMessage: result.error.user_authentication[0]
+            })
+          } else {
+            bake_cookie('token', result.access_token);
+            this.props.setUserToken(result.access_token);
+            this.setState({
+              loginMessage: ''
+            })
           }
         }
       )
-  }
-
-  login(){
-    this.sendLoginApiRequest()
   }
 
   render() {
@@ -63,7 +63,7 @@ class Login extends React.Component {
             onChange={event => this.setState({password: event.target.value})} />
         <button type="button"
           className='btn btn-primary'
-          onClick={() => this.login()}> login </button>
+          onClick={() => this.sendLoginApiRequest()}> login </button>
         </form>
         <div className="message">
           {this.state.loginMessage
@@ -75,4 +75,10 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+function mapStateToProps(state) {
+  return {
+    token: state.token
+  }
+}
+
+export default connect(mapStateToProps, { setUserToken })(Login);

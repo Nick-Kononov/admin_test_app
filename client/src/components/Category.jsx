@@ -19,10 +19,12 @@ class Category extends React.Component {
           className="collapse"
           id={this.props.category.name}>
           {
-            // console.log('cat',this.props.category)&&
             this.props.category.skills.map(skill => {
               return(
-                <Skill key={skill.id} skill={skill} />
+                <Skill
+                  key={skill.id}
+                  skill={skill}
+                  token={this.props.token} />
               )
             })
           }

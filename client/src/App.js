@@ -1,39 +1,13 @@
 import React, { Component } from 'react';
-import { bake_cookie, read_cookie } from 'sfcookies';
+import { connect } from 'react-redux';
+import { updateUser } from './actions';
 import UserCard from './components/UserCard';
 import Login from './components/Login';
 import './app.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoaded: false,
-      user: null
-    };
-  }
-
-  loadUserFromCookies() {
-    let user = read_cookie('user')
-    if (user.id) {
-      this.setState({
-        isLoaded: true,
-        user
-      })
-    }
-  }
-
-  checkForUser() {
-    let token = read_cookie('token')
-    let user = read_cookie('user')
-
-    if (typeof token === 'string' && !user.id) {
-      this.sendCurrentUserApiRequest()
-    }
-  }
-
   sendCurrentUserApiRequest() {
-    let token = 'Bearer ' + read_cookie('token')
+    let token = 'Bearer ' + this.props.token
 
     let opts = {
       'Content-Type':'application/json',
@@ -46,41 +20,34 @@ class App extends Component {
       .then(res => res.json())
       .then(
         (result) => {
-          if (result) {
-            bake_cookie('user', result);
-            this.setState({
-              user: result,
-              isLoaded: true
-            })
-          }
-        }, (error) => {
-          if (error) {
-            this.setState({
-              isLoaded: false,
-              user: null
-            })
+          if (!result.message) {
+            this.props.updateUser(result)
           }
         }
       )
   }
 
-  componentWillMount() {
-    this.checkForUser();
-    this.loadUserFromCookies();
-  }
-  // Check while cookie 'user' appears
-  componentDidMount(){
-    setInterval(() => this.checkForUser(), 1000)
+  componentDidUpdate() {
+    if (!this.props.user && this.props.token) {
+      this.sendCurrentUserApiRequest()
+    }
   }
 
   render() {
     return (
       <div>
-        {this.state.isLoaded ? <UserCard user={this.state.user} /> : <Login />}
+        {this.props.user ? <UserCard user={this.props.user} /> : <Login />}
       </div>
 
     )
   }
 }
 
-export default App;
+function mapStateToProps(state){
+  return {
+    user: state.user,
+    token: state.token
+  }
+}
+
+export default connect(mapStateToProps, { updateUser })(App);

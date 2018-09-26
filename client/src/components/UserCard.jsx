@@ -1,13 +1,15 @@
 import React from 'react'
 import { delete_cookie } from 'sfcookies'
+import { connect } from 'react-redux'
+import { clearAll } from '../actions'
 import Skills from './Skills'
 import Form from './Form';
 
 class UserCard extends React.Component {
 
-  clearCookies() {
-    delete_cookie('user');
+  logOut() {
     delete_cookie('token');
+    this.props.clearAll();
   }
 
   render() {
@@ -19,20 +21,19 @@ class UserCard extends React.Component {
         <div className="card user-card">
           <div className="card-body">
             <div className='card-title'>
-              <a
-                href=''
+              <span
                 className="badge badge-pill badge-danger"
-                onClick={() => this.clearCookies()}>log out</a>
+                onClick={() => this.logOut()}>log out</span>
               <h5>{username || 'No user'}</h5>
             </div>
             <h6 className="card-subtitle mb-2 text-muted">{email}</h6>
             <Skills userSkills={user_skills} />
           </div>
         </div>
-        <Form userSkills={this.props.user.user_skills}/>
+        <Form />
       </div>
     )
   }
 }
 
-export default UserCard;
+export default connect(null, { clearAll })(UserCard);

@@ -1,5 +1,6 @@
 import React from 'react';
-import { read_cookie, delete_cookie } from 'sfcookies';
+import { connect } from 'react-redux';
+import { updateUser } from '../actions';
 
 class Skill extends React.Component {
   constructor(props) {
@@ -26,14 +27,13 @@ class Skill extends React.Component {
   }
 
   updateSkill() {
-    let token = 'Bearer ' + read_cookie('token')
+    let token = 'Bearer ' + this.props.token
     let opts = {
       "id": this.state.id,
       "level": this.state.level,
       "desire": this.state.desire,
       "delete": this.state.disabled
     }
-
     fetch('/api/v1/users/edit_skills',{
       method: 'post',
       headers: {
@@ -41,20 +41,29 @@ class Skill extends React.Component {
         'Authorization': token
       },
       body: JSON.stringify(opts)
-    }).then(() => delete_cookie('user'))
+    })
+      .then(response => response.json())
+      .then(result => {
+        this.props.updateUser(result);
+      })
 
   }
 
   switchDisabled() {
     this.setState(
       {disabled: !this.state.disabled},
-      () => this.updateSkill()
+      () => this.updateSkill()  //synchronous skill update
     )
   }
 
-  createOptions(){
+  createOptions(category){
+    let values = [...Array(11).keys()]
+    if (category === 'desire') {
+      values = values.map(x => x-5)
+    }
+
     return(
-      [...Array(11).keys()].map(value => {
+      values.map(value => {
         return(
           <option
             key={value}
@@ -97,7 +106,7 @@ class Skill extends React.Component {
                   {level: e.target.value},
                   () => this.updateSkill()
                 )}>
-                {this.createOptions()}
+                {this.createOptions('level')}
               </select>
             </div>
             <div className="desire ml-3">
@@ -113,7 +122,7 @@ class Skill extends React.Component {
                   {desire: e.target.value},
                   () => this.updateSkill()
                 )}>
-                {this.createOptions()}
+                {this.createOptions('desire')}
               </select>
             </div>
           </div>
@@ -121,9 +130,10 @@ class Skill extends React.Component {
         <div className="card-text text-muted">
           {this.props.skill.description}
         </div>
+        <hr className="my-1"/>
       </div>
     )
   }
 }
 
-export default Skill;
+export default connect(null, { updateUser })(Skill);
