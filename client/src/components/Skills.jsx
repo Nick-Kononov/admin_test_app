@@ -1,17 +1,6 @@
 import React from 'react';
 
 class Skills extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      active: 0
-    }
-  }
-
-  makeActive(active){
-    this.setState({active});
-  }
-
   render(){
     if (this.props.userSkills) {
       return(
@@ -22,14 +11,13 @@ class Skills extends React.Component {
                 this.props.userSkills.map((user_skill, index) => {
                   return(
                     <a
-                      className={`list-group-item list-group-item-action${this.state.active === index ? ' active' : ''}`}
+                      className={`list-group-item list-group-item-action${index === 0 ? ' active' : ''}`}
                       key={user_skill.id}
                       id={`list-${user_skill.skill.name}-list`}
                       data-toggle="list"
                       href={`#list-${user_skill.skill.name}`}
                       role="tab"
                       aria-controls={user_skill.skill.name}
-                      onClick={() => this.makeActive(index)}
                       >
                         {user_skill.skill.name}
                     </a>
@@ -44,7 +32,7 @@ class Skills extends React.Component {
                 this.props.userSkills.map((user_skill, index) => {
                   return(
                     <div
-                      className={`tab-pane fade${this.state.active === index ? ' show active' : ''}`}
+                      className={`tab-pane fade${index === 0 ? ' show active' : ''}`}
                       key={user_skill.id}
                       id={`list-${user_skill.skill.name}`}
                       role="tabpanel"
@@ -53,8 +41,8 @@ class Skills extends React.Component {
                       {user_skill.skill.description}
                       <ul>
                         <li>level: {user_skill.level}/10</li>
-                        <li>desire: {user_skill.desire}/10</li>
-                        <li>category: {user_skill.skill.category.name}</li>
+                        <li>desire: {user_skill.desire}</li>
+                        <li>{user_skill.skill.category.name} skill</li>
                       </ul>
                     </div>
                   )
