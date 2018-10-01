@@ -3,6 +3,18 @@ ActiveAdmin.register User do
   permit_params :email, :password, :password_confirmation, :username, :role_id,
             user_skills_attributes:[:_destroy, :id, :skill_id, :level, :desire]
 
+  controller do
+    def update
+      model = :user
+      if params[model][:password].blank?
+        %w(password password_confirmation).each { |p| params[model].delete(p) }
+      end
+
+      super
+    end
+  end
+
+
   index do
     selectable_column
     id_column
@@ -20,6 +32,7 @@ ActiveAdmin.register User do
           attributes_table_for user do
             row :email
             row :username
+            row :role
             row :created_at
             row 'Skills' do |u|
               u.skills.count
@@ -52,13 +65,14 @@ ActiveAdmin.register User do
       f.input :email
       f.input :username
       f.input :password
+      f.input :password_confirmation
       f.input :role
     end
 
     f.has_many :user_skills, allow_destroy: true, heading:'Skills' do |t|
       t.input :skill
       t.input :level, as: :select, collection: (1..10)
-      t.input :desire, as: :select, collection: (1..10)
+      t.input :desire, as: :select, collection: (-5..5)
     end
 
     f.actions

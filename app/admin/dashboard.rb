@@ -3,31 +3,27 @@ ActiveAdmin.register_page "Dashboard" do
   menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
 
   content title: proc{ I18n.t("active_admin.dashboard") } do
-    # div class: "blank_slate_container", id: "dashboard_default_message" do
-    #   span class: "blank_slate" do
-    #     span I18n.t("active_admin.dashboard_welcome.welcome")
-    #     small I18n.t("active_admin.dashboard_welcome.call_to_action")
-    #   end
-    # end
-
-    # Here is an example of a simple dashboard with columns and panels.
 
     columns do
       column do
         panel "Recently added users" do
-          ul do
-            User.order(id: :desc).first(5).map do |user|
-              li link_to(user.email, admin_user_path(user))
+          table_for User.where('created_at >= ?', 1.day.ago).order(id: :desc) do
+            column 'Name' do |user|
+              link_to(user.username, admin_user_path(user))
             end
+            column :email
+            column :role
+            column :created_at
           end
         end
       end
 
       column do
         panel "Info" do
-          para "Welcome to ActiveAdmin."
+          para "Welcome to Admin Page."
         end
       end
-    end
+    end # columns
+
   end # content
 end

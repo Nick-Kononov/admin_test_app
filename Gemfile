@@ -21,6 +21,8 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'jwt'
 gem 'simple_command'
 
+gem 'arctic_admin'
+
 gem 'foreman'
 
 gem 'active_model_serializers'
