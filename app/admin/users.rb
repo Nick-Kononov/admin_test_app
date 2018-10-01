@@ -45,7 +45,7 @@ ActiveAdmin.register User do
         panel "Skills" do
           table_for user.user_skills do
             column :skill
-            column 'Section' do |us|
+            column 'Category' do |us|
               us.skill.category
             end
             column :level
