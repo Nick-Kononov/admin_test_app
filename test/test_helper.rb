@@ -8,4 +8,13 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   include FactoryBot::Syntax::Methods
+
+  def authorize symbolic_user
+    @user = create(symbolic_user)
+    post login_api_v1_users_path, params: {
+      email: @user.email,
+      password: @user.password
+    }
+    JSON.parse @response.body
+  end
 end
