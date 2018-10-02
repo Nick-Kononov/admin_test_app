@@ -32,7 +32,7 @@ class Skill extends React.Component {
       "id": this.state.id,
       "level": this.state.level,
       "desire": this.state.desire,
-      "delete": this.state.disabled
+      "delete": this.state.disabled.toString()
     }
     fetch('/api/v1/users/edit_skills',{
       method: 'post',

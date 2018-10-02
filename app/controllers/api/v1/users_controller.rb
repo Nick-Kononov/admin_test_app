@@ -10,23 +10,20 @@ module Api::V1
       respond_to do |format|
         format.json {
           render json: @current_user, serializer: Info::UserSerializer, include: '**'
-          p 'current user returned'
         }
       end
     end
 
     def edit_skills
       @skill = Skill.find(params[:id])
-      p params
 
-      if params[:delete]
+      if JSON.parse params[:delete]
         @current_user.skills.delete(@skill)
       else
         current_user.skills << @skill unless @current_user.skills.exists?(@skill.id)
         user_skill = UserSkill.find_by(user_id: @current_user, skill_id: @skill)
         user_skill.update!(level: params[:level], desire: params[:desire])
       end
-      p 'Successfuly updated'
 
       current
     end
