@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(email: 'some@email.com', password: 'passwd')
+    @user = build(:user)
   end
 
   test "valid user" do
@@ -22,9 +22,14 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "invalid user with password shorter then 6 chars" do
-    @user.password = '12345'
-    refute @user.valid?
-    assert_not_nil @user.errors[:password]
+    user = build(:user_with_short_password)
+    refute user.valid?
+    assert_not_nil user.errors[:password]
+  end
+
+  test '#skills' do
+    user = create(:user_with_skills, skills_count: 2)
+    assert_equal 2, user.skills.size
   end
 
 end
