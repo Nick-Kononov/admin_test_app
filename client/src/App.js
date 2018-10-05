@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { updateUser } from './actions';
 import UserCard from './components/UserCard';
 import Login from './components/Login';
-import './app.css';
+import Navbar from './components/Navbar';
 
 class App extends Component {
   sendCurrentUserApiRequest() {
@@ -34,12 +34,15 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.props.user ? <UserCard user={this.props.user} /> : <Login />}
-      </div>
-
-    )
+    if (this.props.user) {
+      return (
+        <UserCard user={this.props.user} />
+      )
+    } else {
+      return (
+        <Login />
+      )
+    }
   }
 }
 

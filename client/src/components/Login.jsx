@@ -10,7 +10,8 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-      loginMessage: ''
+      loginMessage: '',
+      isSaved: false
     }
   }
 
@@ -21,7 +22,8 @@ class Login extends React.Component {
     }
   }
 
-  sendLoginApiRequest() {
+  sendLoginApiRequest(e) {
+    e.preventDefault();
     let opts = {
       "email": this.state.email,
       "password": this.state.password
@@ -39,7 +41,9 @@ class Login extends React.Component {
               loginMessage: result.error.user_authentication[0]
             })
           } else {
-            bake_cookie('token', result.access_token);
+            if (this.state.isSaved) {
+              bake_cookie('token', result.access_token);
+            }
             this.props.setUserToken(result.access_token);
             this.setState({
               loginMessage: ''
@@ -51,25 +55,47 @@ class Login extends React.Component {
 
   render() {
     return(
-      <div className='card card-body'>
-        <form className='form-inline'>
-          <input type='email'
-            className='form-control'
-            placeholder='email'
-            onChange={event => this.setState({email: event.target.value})} />
-          <input type='password'
-            className='form-control'
-            placeholder='password'
-            onChange={event => this.setState({password: event.target.value})} />
-        <button type="button"
-          className='btn btn-primary'
-          onClick={() => this.sendLoginApiRequest()}> login </button>
+      <div className="text-center">
+        <form className="form-signin" onSubmit={(e) => this.sendLoginApiRequest(e)}>
+          <img className="mb-2 login-logo" src="https://by.pycon.org/assets/img/iTechArt.png" alt=":iTeachArt"/>
+          <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+          <label htmlFor="inputEmail" className="sr-only">Email address</label>
+          <input
+            type="email"
+            id="inputEmail"
+            className="form-control"
+            placeholder="Email address"
+            required
+            autoFocus
+            onChange={event => this.setState({email: event.target.value})}/>
+          <label htmlFor="inputPassword" className="sr-only">Password</label>
+          <input
+            type="password"
+            id="inputPassword"
+            className="form-control"
+            placeholder="Password"
+            required
+            onChange={event => this.setState({password: event.target.value})}/>
+          <div className="custom-control custom-checkbox my-3">
+            <input
+              type="checkbox"
+              className="custom-control-input"
+              id="saveMeCheck"
+              value="remember-me"
+              onChange={() => this.setState({isSaved: !this.state.isSaved})}
+              />
+            <label className="custom-control-label" htmlFor="saveMeCheck">
+              Remember me
+            </label>
+          </div>
+          <button
+            className="btn btn-lg btn-danger btn-block"
+            id="signInButton"
+            type="submit">Sign in
+          </button>
+          <Alert message={this.state.loginMessage} />
+          <p className="m-2 text-muted fixed-bottom">© 2018</p>
         </form>
-        <div className="message">
-          {this.state.loginMessage
-          ? <Alert message={this.state.loginMessage} />
-          : ''}
-        </div>
       </div>
     )
   }

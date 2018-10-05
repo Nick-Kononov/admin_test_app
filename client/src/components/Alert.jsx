@@ -3,12 +3,18 @@ import React from 'react';
 class Alert extends React.Component {
 
   render() {
-    return(
-      <div
-        className="alert alert-primary">
-        {this.props.message}
-      </div>
-    )
+    if (this.props.message){
+      return(
+        <div
+          className="alert alert-danger my-3">
+          {this.props.message}
+        </div>
+      )
+    } else {
+      return(
+        <div></div>
+      )
+    }
   }
 }
 
