@@ -2,9 +2,12 @@ html, body {
   height: 100%;
 }
 
+body {
+  padding-top: 80px;
+}
+
 #root {
   height: 100%;
-  overflow: hidden;
 }
 
 .message {
@@ -77,8 +80,4 @@ select.custom-select.form-control{
 
 hr {
   margin: 0.4em 0;
-}
-
-.user {
-  margin-top: 80px;
 }
