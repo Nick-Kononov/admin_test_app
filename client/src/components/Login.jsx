@@ -15,6 +15,14 @@ class Login extends React.Component {
     }
   }
 
+  componentWillMount(){
+    document.body.style.backgroundColor = "#f5f5f5";
+  }
+
+  componentWillUnmount(){
+    document.body.style.backgroundColor = null;
+  }
+
   componentDidMount(){
     let token = read_cookie('token')
     if (typeof token === 'string') {
@@ -94,7 +102,7 @@ class Login extends React.Component {
             type="submit">Sign in
           </button>
           <Alert message={this.state.loginMessage} />
-          <p className="m-2 text-muted fixed-bottom">© 2018</p>
+          <p className="m-2 text-muted copyright">© 2018</p>
         </form>
       </div>
     )
