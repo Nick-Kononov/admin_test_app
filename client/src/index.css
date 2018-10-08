@@ -4,6 +4,7 @@ html, body {
 
 #root {
   height: 100%;
+  overflow: hidden;
 }
 
 .card {
@@ -73,6 +74,28 @@ html, body {
   border-top-right-radius: 0;
 }
 
+#user-info {
+  width: max-content;
+}
+
+#span-list {
+  display: inline-flex;
+  float: right;
+}
+
+.col-sm-5{
+  background-color: #f0f0f0;
+}
+
+.col-sm-7{
+  background-color: #0f0f0f;
+}
+
+.dropdown-menu {
+  width: max-content;
+  margin-bottom: 1em;
+}
+
 .form-control {
   position: relative;
   height: auto;
@@ -90,4 +113,8 @@ html, body {
   max-width: 330px;
   padding: 15px;
   margin: auto;
+}
+
+.user {
+  margin-top: 80px;
 }

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { updateUser } from './actions';
 import UserCard from './components/UserCard';
 import Login from './components/Login';
-import Navbar from './components/Navbar';
 
 class App extends Component {
   sendCurrentUserApiRequest() {
