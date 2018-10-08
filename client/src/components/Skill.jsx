@@ -77,60 +77,72 @@ class Skill extends React.Component {
 
   render() {
     return(
-      <div className="card-body">
-        <form className="form-group">
-          <div className="form-inline row">
-            <div
-              className="custom-control custom-checkbox">
-              <input
-                type="checkbox"
-                className="custom-control-input form-control"
-                id={`customCheck${this.props.skill.id}`}
-                checked={!this.state.disabled}
-                onChange={() => this.switchDisabled()}/>
-              <label
-                className="custom-control-label"
-                htmlFor={`customCheck${this.props.skill.id}`}>
-                {this.props.skill.name}
-              </label>
+      <div className="skill row">
+        <div className="container">
+          <div className="row">
+            <div className="col-5">
+              <div className="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  className="custom-control-input form-control"
+                  id={`customCheck${this.props.skill.id}`}
+                  checked={!this.state.disabled}
+                  onChange={() => this.switchDisabled()}/>
+                <label
+                  className="custom-control-label"
+                  htmlFor={`customCheck${this.props.skill.id}`}>
+                  {this.props.skill.name}
+                </label>
+              </div>
             </div>
-            <div className="level ml-3">
-              <label
-                htmlFor={`customLevelSelect${this.props.skill.id}`}>Level</label>
-              <select
-                className="custom-select form-control mx-2"
-                id={`customLevelSelect${this.props.skill.id}`}
-                disabled={this.state.disabled}
-                defaultValue={this.state.level}
-                onChange={e => this.setState(
-                  {level: e.target.value},
-                  () => this.updateSkill()
-                )}>
-                {this.createOptions('level')}
-              </select>
+            <div className="col-3">
+              <div className="level">
+                <label
+                  className="selector-label"
+                  htmlFor={`customLevelSelect${this.props.skill.id}`}>
+                    Level</label>
+                <select
+                  className="custom-select form-control"
+                  id={`customLevelSelect${this.props.skill.id}`}
+                  disabled={this.state.disabled}
+                  defaultValue={this.state.level}
+                  onChange={e => this.setState(
+                    {level: e.target.value},
+                    () => this.updateSkill()
+                  )}>
+                  {this.createOptions('level')}
+                </select>
+              </div>
             </div>
-            <div className="desire ml-3">
-              <label
-                htmlFor={`customDesireSelect${this.props.skill.id}`}
-                >Desire</label>
-              <select
-                className="custom-select form-control mx-2"
-                id={`customDesireSelect${this.props.skill.id}`}
-                disabled={this.state.disabled}
-                defaultValue={this.state.desire}
-                onChange={e => this.setState(
-                  {desire: e.target.value},
-                  () => this.updateSkill()
-                )}>
-                {this.createOptions('desire')}
-              </select>
+            <div className="col-3">
+              <div className="desire">
+                <label
+                  className="selector-label"
+                  htmlFor={`customDesireSelect${this.props.skill.id}`}>
+                    Desire</label>
+                <select
+                  className="custom-select form-control"
+                  id={`customDesireSelect${this.props.skill.id}`}
+                  disabled={this.state.disabled}
+                  defaultValue={this.state.desire}
+                  onChange={e => this.setState(
+                    {desire: e.target.value},
+                    () => this.updateSkill()
+                  )}>
+                  {this.createOptions('desire')}
+                </select>
+              </div>
             </div>
           </div>
-        </form>
-        <div className="card-text text-muted">
-          {this.props.skill.description}
+          <div className="row">
+            <div className="col-12">
+              <div className="text-muted">
+                {this.props.skill.description}
+                <hr/>
+              </div>
+            </div>
+          </div>
         </div>
-        <hr className="my-1"/>
       </div>
     )
   }

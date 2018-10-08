@@ -7,51 +7,12 @@ html, body {
   overflow: hidden;
 }
 
-.card {
-  margin: 15px auto;
-  min-width: 320px;
-  max-width: 556px;
-  width: 85%;
-}
-
-#form-group input {
-  margin-right: 1em;
-  margin-bottom: 1em;
-}
-
-.level {
-
-}
-
-.form-inline div label {
-  margin: inherit;
-}
-
 .message {
   margin-top: 1em;
 }
 
-.invisible {
-  display: none;
-}
-
 .badge {
   margin-left: 1em;
-  cursor: pointer;
-  float: right;
-}
-
-.card-title {
-  display: inline;
-}
-
-.level, .desire{
-  width: 33%!important;
-  display: flex!important;
-}
-
-.custom-select {
-  width: 54px;
 }
 
 .text-center {
@@ -83,24 +44,17 @@ html, body {
   float: right;
 }
 
-.col-sm-5{
-  background-color: #f0f0f0;
-}
-
-.col-sm-7{
-  background-color: #0f0f0f;
-}
-
 .dropdown-menu {
   width: max-content;
   margin-bottom: 1em;
 }
 
-.form-control {
-  position: relative;
-  height: auto;
-  padding: 10px;
-  font-size: 16px;
+select.custom-select.form-control{
+  width: fit-content;
+}
+
+.selector-label {
+  margin-right: 1em;
 }
 
 .login-logo {
@@ -113,6 +67,16 @@ html, body {
   max-width: 330px;
   padding: 15px;
   margin: auto;
+}
+
+.cat-skills-list {
+  padding: 0.5em;
+  border-radius: 7px;
+  background-color: #f8f9fa;
+}
+
+hr {
+  margin: 0.4em 0;
 }
 
 .user {

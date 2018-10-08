@@ -57,11 +57,9 @@ class Form extends React.Component{
 
   render() {
     return(
-      <div className="card">
-        <div className="card-body">
-          <h2 className="card-title">Avaliable skills</h2>
-          {this.renderCategories()}
-        </div>
+      <div className="container">
+        <h2>Avaliable skills</h2>
+        {this.renderCategories()}
       </div>
     )
   }

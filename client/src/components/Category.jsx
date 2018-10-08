@@ -6,9 +6,8 @@ class Category extends React.Component {
     return(
       <div className="category">
         <button
-          className="btn btn-primary m-2"
+          className="btn btn-primary my-3"
           type="button"
-          style={{width: 90}}
           data-toggle="collapse"
           data-target={`#${this.props.category.name}`}
           aria-expanded="false"
@@ -16,7 +15,7 @@ class Category extends React.Component {
           {this.props.category.name}
         </button>
         <div
-          className="collapse"
+          className="collapse cat-skills-list"
           id={this.props.category.name}>
           {
             this.props.category.skills.map(skill => {
