@@ -2,7 +2,7 @@ html, body {
   height: 100%;
 }
 
-body {
+.user {
   padding-top: 80px;
 }
 
@@ -36,6 +36,11 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+#inputEmail:focus, #inputPassword:focus {
+  z-index: 5;
+  position: relative;
 }
 
 #user-info {
@@ -73,9 +78,12 @@ select.custom-select.form-control{
 }
 
 .cat-skills-list {
-  padding: 0.5em;
   border-radius: 7px;
   background-color: #f8f9fa;
+}
+
+.skill-container {
+  margin: 0.5em;
 }
 
 hr {

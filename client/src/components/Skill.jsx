@@ -78,7 +78,7 @@ class Skill extends React.Component {
   render() {
     return(
       <div className="skill row">
-        <div className="container">
+        <div className="container skill-container">
           <div className="row">
             <div className="col-5">
               <div className="custom-control custom-checkbox">

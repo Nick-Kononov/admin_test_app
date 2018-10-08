@@ -6,7 +6,7 @@ class Category extends React.Component {
     return(
       <div className="category">
         <button
-          className="btn btn-primary my-3"
+          className="btn btn-primary mb-1 mt-2"
           type="button"
           data-toggle="collapse"
           data-target={`#${this.props.category.name}`}
